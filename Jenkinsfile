@@ -5,7 +5,7 @@ pipeline {
         stage ('Build Image') {
             steps {
                 script { 
-                   dockerapp = docker.build("emerson-faria/api-produto", '-f .src/Dockerfile ./src') 
+                   dockerapp = docker.build("emerson-faria/api-produto", '-f /root/api-produto/src/Dockerfile ./src') 
                 }
             }
         }
