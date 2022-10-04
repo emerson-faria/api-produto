@@ -5,7 +5,7 @@ pipeline {
         stage ('Build Image') {
             steps {
                 script { 
-                   dockerapp = docker.build("emerson-faria/api-produto:${env.BUILD_ID}", '-f /home/vagrant/api-produto/src/Dockerfile ./src') 
+                   dockerapp = docker.build("mersonmoraes/api-produto:${env.BUILD_ID}", '-f /home/vagrant/api-produto/src/Dockerfile ./src') 
                 }
             }
         }
@@ -14,8 +14,8 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-                        bat "docker push emerson-faria/api-produto:${env.BUILD_ID}"
-                        bat "docker push emerson-faria/api-produto:latest"
+                        dockerapp.push('latest')
+                        dockerapp.push("${env.BUILD_ID}")
                     }
                 }
             }
